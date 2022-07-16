@@ -19,6 +19,17 @@ dependencies {
     // javax validation api for notBlank
     implementation 'javax.validation:validation-api'
 
+    // swagger for test and documentation
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
+    implementation('io.springfox:springfox-bean-validators:2.9.2')
+    // h2 dependency
+    runtimeOnly("com.h2database:h2")
+
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
