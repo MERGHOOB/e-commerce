@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * To use findAll and save method for categories
@@ -26,5 +27,17 @@ public class CategoryService {
 
     public List<Category> listCategories() {
         return categoryRepository.findAll();
+    }
+
+    public Category readCategory(Integer categoryID) {
+        return categoryRepository.findById(categoryID).get();
+    }
+
+    public void updateCategory(Integer categoryID, Category newCategory) {
+        Category category = categoryRepository.findById(categoryID).get();
+        category.setCategoryName(newCategory.getCategoryName());
+        category.setDescription(newCategory.getDescription());
+        category.setImageUrl(newCategory.getImageUrl());
+        categoryRepository.save(category);
     }
 }

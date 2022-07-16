@@ -21,15 +21,27 @@ public class CategoryController {
 
     @PostMapping("/create")
     public ResponseEntity<APIResponse> createCategory(@Valid @RequestBody Category category) {
-        if(Objects.nonNull(categoryService.readCategory(category.getCategoryName()))) {
+        if (Objects.nonNull(categoryService.readCategory(category.getCategoryName()))) {
             return new ResponseEntity<>(new APIResponse(false, "Category already exists"), HttpStatus.CONFLICT);
         }
         categoryService.createCategory(category);
         return new ResponseEntity<>(new APIResponse(true, "created the category"), HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<Category>> getCategories() {
         return new ResponseEntity<>(categoryService.listCategories(), HttpStatus.OK);
+    }
+
+    @PostMapping("/update/{categoryID}")
+    public ResponseEntity<APIResponse> updateCategory(@PathVariable("categoryID") Integer categoryID
+            , @Valid @RequestBody Category category) {
+
+        if (Objects.isNull(categoryService.readCategory(categoryID))) {
+            return new ResponseEntity<>(new APIResponse(false, "category does not exist"), HttpStatus.NOT_FOUND);
+        }
+
+        categoryService.updateCategory(categoryID, category);
+        return new ResponseEntity<>(new APIResponse(true, "category is updated"), HttpStatus.OK);
     }
 }
