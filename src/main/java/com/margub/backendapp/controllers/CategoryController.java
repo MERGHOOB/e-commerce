@@ -34,7 +34,8 @@ public class CategoryController {
     }
 
     @PostMapping("/update/{categoryID}")
-    public ResponseEntity<APIResponse> updateCategory(@PathVariable("categoryID") Integer categoryID
+    public ResponseEntity<APIResponse> updateCategory(
+            @PathVariable("categoryID") Integer categoryID
             , @Valid @RequestBody Category category) {
 
         if (Objects.isNull(categoryService.readCategory(categoryID))) {
